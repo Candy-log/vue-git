@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body >
+    <div id="app">
+    <input type="text" v-model="username">
+    <p>Hello {{username}}</p>
+    </div>
+
+    <script type="text/javascript" src="./vue.js"></script>
+    <script>
+        // 创建VUE实例
+        var app = new Vue({ // 配置对象
+            el: '#app', // element
+            data: { // 数据（model）
+               username: 'Hello Vue!'
+            }
+        })
+    </script>
+    <!-- 
+        MVVM:
+        model:模型，数据对象
+        view:视图，模板页面
+        viewModel:视图模型（Vue的实例）
+
+     -->
+</body>
+
+</html>
