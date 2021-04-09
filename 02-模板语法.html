@@ -9,10 +9,10 @@
 <body>
     <div id="app">
         <h2>1.双大括号表达式</h2>
-        <p>{{msg}}</p>  <!--textContent-->
-        <p>{{msg.toUpperCase()}}</p>
+        <p>{{msg}}</p>  <!--textContent 不进行标签解析-->
+        <p>{{msg.toUpperCase()}}</p> <!--双大括号表达式可以进行简单的js处理-->
         <p v-text="msg"></p>  <!--textContent-->
-        <p v-html="msg"></p>  <!--innerHTML-->
+        <p v-html="msg"></p>  <!--innerHTML 标签解析-->
         <h2>2.指令一：强制数据绑定</h2>
         <img src="imgUrl">
         <img v-bind:src="imgUrl">
@@ -27,7 +27,7 @@
             el:"#app",
             data:{
                 // msg:'I Will Back'
-                msg:'<a herf="http:www.atguigu.com">I Will Back</a>',
+                msg:'<a herf="http:www.atguigu.com">I Will Back</a>', // v-text v-html
                 imgUrl:'https://cn.vuejs.org/images/logo.png'
             },
             methods: {
