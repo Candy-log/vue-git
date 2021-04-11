@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表的过滤与排序</title>
+</head>
+
+<body>
+    <div id="demo">
+        <input type="text" v-model="searchName">
+        <ul>
+            <li v-for="(p,index) in filterpersons" :key="index">
+                {{index}}----{{p.name}}----{{p.age}}
+            </li>
+        </ul>
+        <button @click="order(1)">年龄升序</button>
+        <button @click="order(2)">年龄降序</button>
+        <button @click="order(0)">原本顺序</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: "#demo",
+            data: {
+                searchName: '',
+                ordertype: 0, //0-原本顺序，1-年龄升序，2-年龄降序
+                persons: [ //数组对象
+                    { name: 'Tom', age: 18 },
+                    { name: 'Jack', age: 16 },
+                    { name: 'Bob', age: 19 },
+                    { name: 'Rose', age: 17 },
+                ]
+
+            },
+            computed: {
+                filterpersons() {
+                    //取出相关的数据,对象解构
+                    const { searchName, persons, ordertype } = this
+                    // const searchName = this.searchName
+                    // const persons = this.persons
+                    let list = persons.filter(p => p.name.indexOf(searchName) !== -1)
+                    // 取出相对应位置的数组项，赋值给新的数组，数组解构
+                    // let [item1,item2] = this.persons
+                    if (ordertype !== 0) {
+                        if (ordertype == 1) {
+                            //按年龄升序排列
+                            list.sort(function (p1, p2) {
+                                return p1.age - p2.age
+                            })
+                        } else {
+                            //按年龄降序排列
+                            list.sort(function (p1, p2) {
+                                return p2.age - p1.age
+                            })
+                        }
+                    }
+
+                    return list
+
+                }
+            },
+            methods: {
+                order(type){
+                    this.ordertype = type
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

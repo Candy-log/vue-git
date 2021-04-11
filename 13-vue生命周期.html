@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+        <button @click="destroyVM">destroy vm</button>
+        <p v-show="isShow">尚硅谷IT教育</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: "#test",
+            data: {
+                isShow: true,
+                intervalId: null // 1.定义计时器id
+            },
+            beforeCreate() {
+                console.log('beforeCreate')
+            },
+            created(){
+                console.log('created')
+            },
+            beforeMount() {
+                console.log('beforeMount')
+            },
+            mounted() { // 回调函数尽量用箭头函数，箭头函数就是来一方面可简化写法，另一方面可以定义匿名函数
+                console.log('mounted')
+                this.intervalId = setInterval(() => { // 2.获取定时器id
+                    console.log('-----');
+                    this.isShow = !this.isShow
+                }
+                    , 1000)
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate')
+            },
+            updated() {
+                console.log('updated')
+            },
+            beforeDestroy() { //死亡之前调用（1次）
+                // 清除定时器
+                console.log('beforeDestroy')
+                clearInterval(this.intervalId) // 3.根据定时器id清除指定的定时器
+            },
+            destroyed() {
+                console.log('destroyed')
+            },
+            methods: {
+                destroyVM() {
+                    this.$destroy()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

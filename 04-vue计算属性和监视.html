@@ -89,6 +89,7 @@
             }, 
                 
         })
+        // vm.$watch('a.b.c',function(value)--其中b是a对象里的属性，c是b对象里的属性
         vm.$watch('lastname',function(value){
             // 更新fullName2
             this.fullName2 = this.firstname + ' ' + value
