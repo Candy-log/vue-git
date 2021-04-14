@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="example">
+        <p ref="content">atguigu.com</p>
+        <button @click="hint">提示</button>
+        <p v-cloak>{{msg}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#example",
+            data:{
+                msg:'尚硅谷'
+            },
+            methods: {
+                hint(){
+                    console.log(this.$refs.content.textContent);
+                }
+            },
+
+        })
+    </script>
+</body>
+</html>

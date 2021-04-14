@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+        <h2>显示格式化的日期时间</h2>
+        <p>{{date}}</p>
+        <p>{{date | dateString}}</p>
+        <p>{{date | dateString("YYYY-MM-DD")}}</p>
+        <p>{{date | dateString("HH:mm:ss")}}</p>
+
+        {{time | dateString}}
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./moment.js"></script>
+    <script>
+        // vue 过滤器只能从页面取值进行格式化
+        Vue.filter('dateString', function (value, fomat ="YYYY-MM-DD  HH:mm:ss" ) { //fomat ="YYYY-MM-DD  HH:mm:ss"可以先给个形参默认值，有传值就用传值，没传值就用默认值
+            // if (fomat) { //可以判断形参fomat是否存在
+
+            //     return moment(value).format(fomat)
+            // } else {
+            //     return moment(value).format("YYYY-MM-DD  HH:mm:ss")
+            // }
+            // return moment(value).format(fomat || "YYYY-MM-DD  HH:mm:ss")
+            return moment(value).format(fomat)
+        })
+        new Vue({
+            el: "#test",
+            data: {
+                date: new Date(),
+                time:'2019/05/12 05:34:12'
+            }
+        })
+
+    </script>
+</body>
+
+</html>
