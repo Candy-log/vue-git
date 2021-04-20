@@ -1,64 +1,59 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-wrap">
-      <todoheader :addTitle="addTitle"></todoheader>
-      <todolist :todos="todos" :deleteTodo="deleteTodo"></todolist>
-      <todofooter
-        :todos="todos"
-        :deleteCompleteTodos="deleteCompleteTodos"
-        :selectAllTodos="selectAllTodos"
-      ></todofooter>
+  <div>
+    <div v-if="!repoUr1">loding</div>
+    <div v-else>
+      moster star repo is
+      <a :href="repoUr1">{{repoName}}</a>
     </div>
   </div>
 </template>
 
 <script>
-import todoheader from "./components/todoheader";
-import todolist from "./components/todolist";
-import todofooter from "./components/todofooter";
 export default {
-  components: {
-    todoheader,
-    todolist,
-    todofooter,
-  },
   data() {
     return {
-      todos: [
-        { title: "吃饭", complete: false },
-        { title: "睡觉", complete: true },
-        { title: "coding", complete: false },
-      ],
+      repoUr1: "",
+      repoName: "",
     };
   },
-  methods: {
-    addTitle(todo) {
-      this.todos.unshift(todo);
-    },
-    deleteTodo(index) {
-      this.todos.splice(index, 1);
-    },
-    // 删除所有选的todo
-    deleteCompleteTodos() {
-      this.todos = this.todos.filter((todo) => !todo.complete);
-    },
-    // 全选/全不选
-    selectAllTodos(check) {
-      this.todos.forEach((todo) => (todo.complete = check));
-    },
+  mounted() {
+    // 发ajax请求获取数据
+    const url = `https://api.github.com/search/users?q=vue&sort=star`;
+    // this.$http.get(url).then(
+    //   (response) => {
+    //     // 成功了
+    //     debugger;
+    //     const result = response.data;
+    //     // 得到最受欢迎的repo
+    //     const mostRepo = result.items[0];
+    //     console.log(mostRepo);
+    //     this.repoUr1 = mostRepo.html_url;
+    //     this.repoName = mostRepo.login;
+    //   },
+    //   (faile) => {
+    //     console.log(faile);
+    //     alert("请求失败");
+    //   }
+    // );
+    this.$axios
+      .get(url)
+      .then((response) => {
+        // 成功了
+        debugger;
+        const result = response.data;
+        // 得到最受欢迎的repo
+        const mostRepo = result.items[0];
+        console.log(mostRepo);
+        this.repoUr1 = mostRepo.html_url;
+        this.repoName = mostRepo.login;
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("请求失败");
+      });
   },
 };
 </script>
 
-<style>
-/*app*/
-.todo-container {
-  width: 600px;
-  margin: 0 auto;
-}
-.todo-container .todo-wrap {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
+<style scoped lang="less">
 </style>

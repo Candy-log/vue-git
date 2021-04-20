@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    addTitle: Function,
+  
   },
   data() {
     return {
@@ -34,7 +34,8 @@ export default {
         complete: false,
       };
       // 3.将生成的todo对象添加到title中
-      this.addTitle(todo);
+      // this.addTitle(todo)
+      this.$emit('addTitle',todo)
 
       // 4.清除输入框
       this.title = "";

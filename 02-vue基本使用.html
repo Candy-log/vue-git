@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 
-<body >
+<body>
     <div id="app">
-    <input type="text" v-model="username">
-    <p>Hello {{username}}</p>
+        <input type="text" v-model="username">
+        <p>Hello {{username}}</p>
     </div>
 
     <script type="text/javascript" src="./vue.js"></script>
@@ -20,9 +20,34 @@
         var app = new Vue({ // 配置对象
             el: '#app', // element
             data: { // 数据（model）
-               username: 'Hello Vue!'
+                username: 'Hello Vue!'
             }
         })
+    </script>
+    <script>
+        var obj = {
+            name: "xiaoming",
+            age: 12,
+            family: [{ name: "father", age: 32 }, { name: "mather", age: 32 }]
+        }
+
+        const persons = [{ name: "father", age: 32 }, { name: "mather", age: 32 }]
+
+        // 对象解构
+        // const name = obj.name;
+        // const age = obj.age;
+        // const family = obj.family;
+        const { name, age, family } = obj;
+
+        // 数组解构
+        // const item0 = persons[0];
+        // const item1 = persons[1];
+        const [item0, item1] = persons;
+
+        // 对象简写
+        obj2 = {
+            name, age, family
+        }
     </script>
     <!-- 
         MVVM:

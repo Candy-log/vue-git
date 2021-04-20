@@ -26,7 +26,7 @@ export default {
   computed: {
     completeSize() {
       return this.todos.reduce(
-        (preTotal, todo) => preTotal + (todo.complete ? 1 : 0),
+        (preTotal, todo) => preTotal + (todo.complete ? 1 : 0), //返回值作为下一次的preTotal的值
         0
       );
     },

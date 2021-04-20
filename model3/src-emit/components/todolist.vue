@@ -5,7 +5,7 @@
       :key="index"
       :todo="todo"
       :index="index"
-      :deleteTodo="deleteTodo"
+     
     ></todoitem>
   </ul>
 </template>
@@ -18,7 +18,7 @@ export default {
   },
   props: {
     todos: Array,
-    deleteTodo: Function,
+    
   },
 };
 </script>
